@@ -1,0 +1,77 @@
+body {
+    text-align: center;
+}
+
+body {
+    text-align: center;
+}
+
+/* Estilizando o título */
+h1 {
+    font-size: 36px; /* Tamanho da fonte maior */
+    margin-bottom: 20px;
+    color: #d41971; /* Cor rosa-bebê */
+    font-family: 'Arial', sans-serif; /* Use a fonte que desejar */
+}
+
+/* Estilizando o parágrafo */
+p {
+    font-size: 20px; /* Tamanho da fonte maior */
+    color: #f5a3b0; /* Cor rosa-bebê */
+    font-family: 'Arial', sans-serif; /* Use a fonte que desejar */
+}
+
+/* Ajuste o estilo dos links para a cor rosa-bebê */
+.social-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #FFC0CB; /* Cor rosa-bebê */
+}
+
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: lightgray; /* Cor inicial das células */
+}
+
+.cell.x {
+    background-color: lightgreen;
+}
+
+.cell.o {
+    background-color: pink;
+}
+
+/* Estilizando o botão "Reiniciar" */
+button {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #FFC0CB; /* Cor rosa-bebê */
+    color: #fff; /* Cor do texto branca */
+    border: none;
+    border-radius: 10px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out; /* Efeito de transição suave na cor de fundo */
+}
+
+/* Mudança de cor do botão ao passar o mouse */
+button:hover {
+    background-color: #FF1493; /* Cor rosa mais intensa ao passar o mouse */
+}
+
+
