@@ -1,39 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Jogo da Velha</title>
-</head>
-<body>
-    <h1>Jogo da Velha</h1>
-    <!-- Mensagem inicial -->
-    <p id="message"></p>
+let currentPlayer = 'X';
+let gameBoard = ['', '', '', '', '', '', '', '', ''];
 
-    <div class="board">
-        <div class="cell" onclick="makeMove(0)"></div>
-        <div class="cell" onclick="makeMove(1)"></div>
-        <div class="cell" onclick="makeMove(2)"></div>
-        <div class="cell" onclick="makeMove(3)"></div>
-        <div class="cell" onclick="makeMove(4)"></div>
-        <div class="cell" onclick="makeMove(5)"></div>
-        <div class="cell" onclick="makeMove(6)"></div>
-        <div class="cell" onclick="makeMove(7)"></div>
-        <div class="cell" onclick="makeMove(8)"></div>
-    </div>
-    <button onclick="resetGame()">Reiniciar</button>
-    <script src="script.js"></script>
-    <div class="social-links">
-        <p>Siga-me nas redes sociais:</p>
-        <a href="https://www.linkedin.com/in/fabr%C3%ADcia-rafaella-de-souza/" target="_blank">
-            <img src="./img/linkedin.png" alt="LinkedIn">
-        </a>
-        <a href="https://www.instagram.com/rafa_vitroda/" target="_blank">
-            <img src="./img/instagram.png" alt="Instagram">
-        </a>
-    </div>
-    
+// Use a função confirm para exibir uma mensagem de confirmação
+var mensagemInicial = "Bem-vindos ao Jogo da Velha. Vamos começar?";
+var confirmacao = confirm(mensagemInicial);
 
-</body>
-</html>
+// Verifique a resposta do jogador (true para "Sim", false para "Não")
+if (confirmacao) {
+  // O jogador clicou em "Sim"
+  // Inicie o jogo aqui
+} else {
+  // O jogador clicou em "Não" ou fechou a caixa de diálogo
+  // Lide com isso de acordo com sua lógica
+}
+
+
+
+// Solicita os nomes dos jogadores
+const playerXName = prompt("Qual o nome do Jogador X:");
+const playerOName = prompt("Qual o nome do Jogador O:");
+
+// Exibe uma mensagem de saudação
+const messageElement = document.getElementById('message');
+messageElement.textContent = `Bem-vindos, ${playerXName} (X) e ${playerOName} (O)! O jogo vai começar.`;
+
+
+// Chame esta função no início para exibir a mensagem inicial
+updatePlayerMessage();
+
+// Resto do código permanece o mesmo
+
+
+
+
+function makeMove(index) {
+    if (gameBoard[index] === '' && !checkWinner()) {
+        gameBoard[index] = currentPlayer;
+        const cell = document.getElementsByClassName('cell')[index];
+        cell.textContent = currentPlayer;
+        cell.classList.add(currentPlayer.toLowerCase());
+        cell.style.backgroundColor = ''; // Remover a cor de fundo cinza
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        checkWinner(); // Verificar se há um vencedor após cada jogada
+    }
+}
+
+function checkWinner() {
+    const winCombos = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+    ];
+
+    for (const combo of winCombos) {
+        const [a, b, c] = combo;
+        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+            const winnerName = gameBoard[a] === 'X' ? playerXName : playerOName;
+            document.getElementById('message').textContent = `Parabéns, ${winnerName} venceu!`;
+            return true;
+        }
+    }
+
+    if (!gameBoard.includes('')) {
+        document.getElementById('message').textContent = 'Empate! O jogo acabou.';
+        return true;
+    }
+
+    return false;
+}
+
+
+
+
+// Resto do código permanece o mesmo
+
+function resetGame() {
+    gameBoard = ['', '', '', '', '', '', '', '', ''];
+    currentPlayer = 'X';
+    const cells = document.getElementsByClassName('cell');
+    for (const cell of cells) {
+        cell.textContent = '';
+        cell.classList.remove('winner'); // Remover a classe "winner" das células
+    }
+}
